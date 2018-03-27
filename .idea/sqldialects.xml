@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/sql/14-12-2017.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/Gammel_SQL/23-11-2017.sql" dialect="MySQL" />
+  </component>
+</project>

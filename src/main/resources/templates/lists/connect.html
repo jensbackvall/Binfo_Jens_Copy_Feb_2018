@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: site-head">
+    <title>Admin - Lister</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header th:replace="layout :: site-header"/>
+    <aside th:replace="layout :: site-aside"/>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                SAMMENLÆGNINGSLISTE
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"><a href="#">Lejligheder</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <div class="col-sm-2">
+                                <a href="/lists/connect" class="btn btn-success btn-block"
+                                   role="button">
+                                    Sammenlægning</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/lists/internal" class="btn btn-success btn-block" role="button">Intern</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/lists/family" class="btn btn-success btn-block"
+                                   role="button">Familie</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/lists/external" class="btn btn-success btn-block" role="button">Ekstern</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a href="/lists/connect/pdf" class="btn btn-success btn-block"
+                                   role="button">PDF fra liste</a>
+                            </div>
+                        </div>
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Listeplacering</th>
+                                    <th>Fornavn</th>
+                                    <th>Efternavn</th>
+                                    <th>Adresse</th>
+                                    <th>Postnummer</th>
+                                    <th>Email</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Nuværende Lejlighed</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="listuser, status : ${list}">
+                                    <td th:text="${status.count}">1</td>
+                                    <td th:text="${listuser.name}">Fornavn</td>
+                                    <td th:text="${listuser.lastName}">Efternavn</td>
+                                    <td th:text="${listuser.address}">Adresse</td>
+                                    <td th:text="${listuser.postCode}">Postnummer</td>
+                                    <td th:text="${listuser.email}">Email</td>
+                                    <td th:text="${listuser.phoneNumber}">Telefonnummer</td>
+                                    <td th:text="${listuser.myApartment}">Brugers Lejlighed</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Listeplacering</th>
+                                    <th>Fornavn</th>
+                                    <th>Efternavn</th>
+                                    <th>Adresse</th>
+                                    <th>Postnummer</th>
+                                    <th>Email</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Nuværende Lejlighed</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <p class="admin-message-text text-center" th:utext="${PDFMessage}"></p>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <footer th:replace="layout :: site-footer"/>
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable();
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false
+            })
+        })
+    </script>
+</div>
+</body>
+</html>

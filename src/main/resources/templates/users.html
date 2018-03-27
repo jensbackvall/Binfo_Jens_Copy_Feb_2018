@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: site-head">
+    <title>Admin - Brugere</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header th:replace="layout :: site-header" />
+    <aside th:replace="layout :: site-aside" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Brugere
+                <small>Overblik</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"><a href="#">Brugere</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <a href="users/add" class="btn btn-block btn-success" role="button">Tilføj bruger</a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Email</th>
+                                    <th>Navn</th>
+                                    <th>Efternavn</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Aktiv j/n</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="users, status : ${users}">
+                                    <td th:text="${status.count}">1</td>
+                                    <td th:text="${users.email}">Address</td>
+                                    <td th:text="${users.name}">number</td>
+                                    <td th:text="${users.lastName}">size</td>
+                                    <td th:text="${users.phoneNumber}">rooms</td>
+                                    <td>
+                                        <span class="glyphicon glyphicon-ok" th:if="${users.active}"></span>
+                                        <span class="glyphicon glyphicon-remove" th:unless="${users.active}"></span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success dropdown-toggle"
+                                                    data-toggle="dropdown">Valgmuligheder
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a th:href="@{'users/edit/' + ${users.email}}">Rediger Bruger</a></li>
+                                                <li><a th:href="@{'users/delete/' + ${users.email}}" onclick="return
+                                                confirm('Er du sikker på at du vil slette brugeren?')">Slet</a></li>
+                                                </li>
+                                                <!-- <li><a href="http://lmgtfy.com/?q=jeg+har+ingen+ide">Jeg har ingen
+                                                ide</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="https://www.youtube.com/watch?v=8gyLR4NfMiI">Look at me
+                                                now</a></li> -->
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Email</th>
+                                    <th>Navn</th>
+                                    <th>Efternavn</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Aktiv j/n</th>
+                                    <th></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <footer th:replace="layout :: site-footer" />
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+        })
+    </script>
+</div>
+</body>
+</html>
+
+
+

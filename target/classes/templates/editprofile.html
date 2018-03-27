@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="layout :: site-head">
+    <title>Admin - Rediger bruger</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header th:replace="layout :: site-header" />
+    <aside th:replace="layout :: site-aside" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Brugere
+                <small>Rediger</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content container-fluid">
+
+            <!-- Horizontal Form -->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Rediger Personlige Oplysninger</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" id="form-horizontal" autocomplete="off" th:action="@{'/editprofile/' + ${editeduser.email}}" th:object="${editeduser}" method="post" role="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputEmail" th:value="*{email}" th:field="*{email}" required="" type="text" placeholder="Email" disabled>
+                                <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Fornavn</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" th:value="*{name}" th:field="*{name}" required="" type="text" placeholder="Fornavn">
+                                <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName" class="col-sm-2 control-label">Efternavn</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="lastName" th:value="*{lastName}" th:field="*{lastName}" type="text" required="" placeholder="Efternavn">
+                                <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber" class="col-sm-2 control-label">Telefonnummer</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phoneNumber" th:value="*{phoneNumber}" th:field="*{phoneNumber}" type="number" required="" placeholder="Telefonnummer">
+                                <label th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="validation-message"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <p class="admin-message-text text-center" th:utext="${activeMessage}"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="reset"
+                                class="btn btn-default"><a onclick="return
+                                confirm('Vil du ikke gemme oplysningerne?')">Reset</a></button>
+                        <button type="Edit"  value ="Edit" class="btn btn-info pull-right"><a onclick="return confirm('Er de indtastede oplysninger korrekte?')">Tilføj</a></button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+            <!-- /.box -->
+            <p class="admin-message-text text-center" th:utext="${successMessage}"></p>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer th:replace="layout :: site-footer" />
+</div>
+</body>
+</html>

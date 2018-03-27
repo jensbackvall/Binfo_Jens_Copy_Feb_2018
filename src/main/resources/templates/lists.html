@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: site-head">
+    <title>Admin - Lister</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header th:replace="layout :: site-header" />
+    <aside th:replace="layout :: site-aside" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Lister
+                <small>Overblik</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"><a href="#">Lejligheder</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-primary">
+                        <!-- Tilpas de nedenstående boxes størrelse, inline -->
+                        <!-- OBS. Hver af de fire første knapper skal angive en prioritet 1, 2, 3 eller 4 som vi
+                        kan sende til bage til controlleren for at bestemme hvilken arraylist som brugerne
+                        læses fra-->
+                        <div class="small-box">
+                            <a href="list/connect" class="btn btn-block btn-success" role="button">Sammenlægningsliste</a>
+                        </div>
+                        <div class="small-box">
+                            <a href="list/intern" class="btn btn-block btn-success" role="button">Intern Liste</a>
+                        </div>
+                        <div class="small-box">
+                            <a href="list/family" class="btn btn-block btn-success" role="button">Familieliste</a>
+                        </div>
+                        <div class="small-box">
+                            <a href="list/external" class="btn btn-block btn-success" role="button">Ekstern Liste</a>
+                        </div>
+                        <div class="small-box">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success">Liste for én lejlighed</button>
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <!-- Lav form med brugerinput LEJLIGHEDSNUMMER -->
+                                    <li> <form></form> </li>
+                                    <!-- Lav form med brugerinput ANTAL PERSONER -->
+                                    <li> <form></form> </li>
+                                    <!-- Lav button til generering af liste -->
+                                    <li> <button></button> </li>
+                                </ul>
+                            </div>
+                            <a href="apartment/add" class="btn btn-block btn-success" role="button">Liste for én lejlighed</a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Listeplacering</th>
+                                    <th>Email</th>
+                                    <th>Fornavn</th>
+                                    <th>Efternavn</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Nuværende Lejlighed</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user, status : ${user}">
+                                    <td th:text="${status.count}">1</td>
+                                    <td th:text="${user.email}">Email</td>
+                                    <td th:text="${user.name}">Fornavn</td>
+                                    <td th:text="${user.last_name}">Efternavn</td>
+                                    <td th:text="${user.phone_number}">Telefonnummer</td>
+                                    <td th:text="${user.my_apartment}">Brugers Lejlighed</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Listeplacering</th>
+                                    <th>Email</th>
+                                    <th>Fornavn</th>
+                                    <th>Efternavn</th>
+                                    <th>Telefonnummer</th>
+                                    <th>Nuværende Lejlighed</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#example1').DataTable();
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
+        })
+    </script>
+    <!-- Main Footer -->
+    <footer th:replace="layout :: site-footer" />
+</div>
+</body>
+</html>
